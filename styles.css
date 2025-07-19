@@ -1,0 +1,97 @@
+/* Use a parchment-like background */
+body {
+  background-color: #fef3c7; /* Soft parchment tone */
+  font-family: 'Kaushan Script', cursive;
+  margin: 0;
+  padding: 10px;
+  width: 320px;
+  height: 500px;
+  box-sizing: border-box;
+}
+
+/* Container styled like an ancient scroll */
+#popup-container {
+  border: 4px double #8b5e3c;
+  padding: 16px;
+  background: linear-gradient(to bottom, #fdf6e3, #fef3c7);
+  border-radius: 10px;
+  box-shadow: 0 0 10px #a16207;
+}
+
+/* Header: icon and title */
+.header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 8px 0 4px;
+  color: #7c2d12; /* Deep red-brown */
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #78350f;
+  margin-bottom: 10px;
+}
+
+/* Input area */
+textarea {
+  width: 100%;
+  height: 90px;
+  padding: 10px;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 14px;
+  border: 2px solid #b45309;
+  border-radius: 8px;
+  background-color: #fff8dc;
+  resize: none;
+  box-shadow: inset 0 0 5px #a16207;
+}
+
+/* Button styled like an engraved tab */
+#ask-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: #d97706;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #92400e;
+  transition: all 0.2s ease-in-out;
+}
+
+#askBtn:hover {
+  background-color: #b45309;
+}
+
+/* Response scroll box */
+#response {
+  margin-top: 15px;
+  max-height: 180px;
+  overflow-y: auto;
+  background-color: #fffaf0;
+  border: 2px dashed #a16207;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #3f2c1c;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.placeholder-text {
+  color: #9a3412;
+  font-style: italic;
+}
