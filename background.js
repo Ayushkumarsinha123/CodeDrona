@@ -7,14 +7,14 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // Listener to handle messages from popup or content script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log("Message received in background.js:", request);
+  console.log("Message received in background.js:", request);``
 
   if (request.type === "ask_ai") {
     // Placeholder for OpenRouter API call
     fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "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",  // Replace this
+        "Authorization": "Bearer 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",  // Replace this
         "Content-Type": "application/json"
       },
       body: JSON.stringify({

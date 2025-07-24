@@ -19,12 +19,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "tabs"
-  ],
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
   "host_permissions": [
     "*://*.leetcode.com/*",
     "*://*.geeksforgeeks.org/*",
@@ -32,14 +27,10 @@
     "https://openrouter.ai/*"
   ],
   "content_scripts": [
-  {
-    "matches": [
-      "https://leetcode.com/problems/*",
-      "https://www.geeksforgeeks.org/*",
-      "https://www.hackerrank.com/*"
-    ],
-    "js": ["content.js"],
-    "run_at": "document_idle"
-  }
-]
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
 }

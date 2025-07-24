@@ -1,27 +1,51 @@
-function extractQuestionText() {
-  let description = "";
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "extractProblem") {
+    let text = "";
 
-  if (window.location.hostname.includes("leetcode.com")) {
-    const el = document.querySelector(".content__u3I1.question-content__JfgR");
-    if (el) description = el.innerText;
-  } else if (window.location.hostname.includes("geeksforgeeks.org")) {
-    const el = document.querySelector(".entry-content");
-    if (el) description = el.innerText;
-  } else if (window.location.hostname.includes("hackerrank.com")) {
-    const el = document.querySelector(".problem-statement");
-    if (el) description = el.innerText;
-  }
-
-  return description.trim();
-}
-
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "extractProblem") {
-    const text = extractQuestionText();
-    if (text) {
-      sendResponse({ text });
-    } else {
-      sendResponse({ text: "⚠️ Could not extract question from the page." });
+    // Try LeetCode-style
+    const leetDesc = document.querySelector(
+      ".content__u3I1.question-content__JfgR"
+    );
+    if (leetDesc) {
+      text = leetDesc.innerText.trim();
     }
+
+    // Try GeeksforGeeks-style
+    const gfgDesc = document.querySelector(".problem-statement");
+    if (!text && gfgDesc) {
+      text = gfgDesc.innerText.trim();
+    }
+
+    // Try Codeforces
+    const cfDesc = document.querySelector(".problem-statement");
+    if (!text && cfDesc) {
+      text = cfDesc.innerText.trim();
+    }
+
+    // Try HackerRank
+    const hrDesc = document.querySelector(".challenge_problem_statement");
+    if (!text && hrDesc) {
+      text = hrDesc.innerText.trim();
+    }
+
+    // Fallback: first big block of text
+    if (!text) {
+      const allParagraphs = document.querySelectorAll("p");
+      text = Array.from(allParagraphs)
+        .map((p) => p.innerText.trim())
+        .filter((t) => t.length > 40)
+        .join("\n\n")
+        .slice(0, 1000); // Avoid too much text
+    }
+
+    if (!text) {
+      sendResponse({
+        text: "⚠️ Could not find the problem description element.",
+      });
+    } else {
+      sendResponse({ text });
+    }
+
+    return true; // Keep the message channel open
   }
 });
