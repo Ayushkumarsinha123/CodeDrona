@@ -1,5 +1,5 @@
 // background.js
-
+importScripts('config.js');
 // Fired when the extension is first installed
 chrome.runtime.onInstalled.addListener(() => {
   console.log("CodeDrona extension installed — your AI Guru is ready!");
@@ -8,13 +8,13 @@ chrome.runtime.onInstalled.addListener(() => {
 // Listener to handle messages from popup or content script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("Message received in background.js:", request);``
-
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`
   if (request.type === "ask_ai") {
     // Placeholder for OpenRouter API call
-    fetch("https://openrouter.ai/api/v1/chat/completions", {
+    fetch(API_URL, {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",  // Replace this
+        "Authorization": "Bearer ",  // Replace this
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
